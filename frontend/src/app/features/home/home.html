@@ -1,0 +1,90 @@
+<div class="relative min-h-screen bg-white">
+
+  <header class="fixed top-0 left-0 z-50 w-full h-20 lg:h-23 bg-[#25324f] px-2 md:px-4 lg:px-4  flex items-center justify-between">
+    
+    <div class="flex items-center">
+      <img
+        src="/logo-navbar.png"
+        alt="Logo"
+        class="sm:w-50 md:w-[330px] lg:w-75" 
+      />
+    </div>
+
+    <nav class="flex items-center gap-4 md:gap-10">
+      <ul class="hidden md:flex items-center gap-7 text-white font-semibold">
+        <li><a href="#" class="hover:underline">Funcionalidades</a></li>
+        <li><a href="#" class="hover:underline">Suporte</a></li>
+      </ul>
+
+      <div class="flex items-center gap-2 md:gap-4">
+        <button routerLink="/login"
+          class="text-white text-sm md:text-base font-semibold hover:opacity-80 transition cursor-pointer px-2"
+        >
+          Login
+        </button>
+
+        <button routerLink="/cadastro"
+          class="bg-[#2970d4] hover:bg-blue-600 transition text-white text-sm md:text-base font-semibold px-3 py-2 md:px-4 md:py-2 rounded cursor-pointer whitespace-nowrap"
+        >
+          Cadastre-se
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="pt-37 lg:pt-30 px-6 md:px-10 pb-20 md:pt-24 ">
+    
+    <section class="flex flex-col lg:flex-row items-center justify-between gap-10 mb-20">
+      
+      <div class="flex flex-col gap-4 max-w-xl text-center lg:text-left items-center lg:items-start">
+        <h1 class="text-3xl md:text-5xl font-bold leading-tight text-[#25324f]">
+          Simplifique a gestão <br class="hidden md:block" />
+          de seus clientes
+        </h1>
+
+        <p class="text-gray-600 text-lg md:text-xl">
+          Gerencie seus clientes de forma eficaz e centralizada com nossa
+          plataforma.
+        </p>
+
+        <div class="flex flex-col items-center lg:items-start gap-2 w-full">
+          <button routerLink="/cadastro" class="w-full sm:w-auto bg-[#2970d4] px-8 py-3 text-white font-semibold text-xl cursor-pointer hover:bg-blue-600 transition">
+            Experimente grátis
+          </button>
+          <p class="text-gray-500 text-sm">Não é necessário cartão de crédito</p>
+        </div>
+      </div>
+
+      <div class="w-full lg:w-auto flex justify-center">
+        <img src="/dashboard.png" class="w-full max-w-[600px] lg:max-w-[730px] h-auto" alt="Dashboard Preview">
+      </div>
+    </section>
+
+    <section class="flex flex-col gap-2">
+      <div class="text-center">
+        <h3 class="text-3xl md:text-4xl font-bold text-gray-700 mb-8 md:mb-12">
+          O que oferecemos?
+        </h3>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12 max-w-6xl mx-auto">
+        @for (item of funcionalidades; track item.title) {
+          <div class="flex flex-col items-center text-center gap-2 group">
+            <div class="transition-transform group-hover:scale-105">
+              <img [src]="item.icon" class="w-28 h-28 md:w-35 md:h-35" />
+            </div>
+
+            <h3 class="text-lg font-semibold">
+              {{ item.title }}
+            </h3>
+
+            <p class="text-gray-500 text-sm md:text-base">
+              {{ item.description }}
+            </p>
+          </div>
+        }
+      </div>
+    </section>
+
+  </main>
+</div>

@@ -1,0 +1,50 @@
+<header class="h-16 bg-[#25324f] text-white flex items-center justify-between px-6 shadow-md relative">
+  
+  <div class="flex items-center">
+    <span class="font-semibold text-lg">Gestão de clientes</span>
+  </div>
+
+  <nav class="hidden lg:flex items-center gap-8 text-sm font-semibold">
+    <a routerLink="/dashboard/" routerLinkActive="border-b-2 border-blue-400" class="pb-1 hover:text-blue-300 transition cursor-pointer">Dashboard</a>
+    <a routerLink="/dashboard/registrar-usuario" routerLinkActive="border-b-2 border-blue-400" class="pb-1 hover:text-blue-300 transition cursor-pointer">Adicionar cliente</a>
+    <a routerLink="/dashboard/relatorio" routerLinkActive="border-b-2 border-blue-400" class="pb-1 hover:text-blue-300 transition cursor-pointer">Relatórios</a>
+    <a routerLink="/dashboard/configuracoes" routerLinkActive="border-b-2 border-blue-400" class="pb-1 hover:text-blue-300 transition cursor-pointer">Configurações</a>
+  </nav>
+
+  <div class="hidden lg:flex items-center gap-6">
+    <span class="text-sm">Olá, <strong>Administrador</strong></span>
+    <button class="bg-[#155dfc] p-1.5 rounded transition cursor-pointer hover:bg-blue-800" (click)="onLogout()">Sair</button>
+  </div>
+
+  <button (click)="ismenuOpen = !ismenuOpen" class="lg:hidden p-2 text-white outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+    </svg>
+  </button>
+
+  @if (ismenuOpen) {
+    <div class="fixed inset-0 z-[60] lg:hidden">
+      <div class="fixed inset-0 bg-black/50" (click)="ismenuOpen = false"></div>
+      
+      <div class="fixed right-0 top-0 h-full w-64 bg-[#25324f] shadow-xl p-6 flex flex-col gap-8 animate-in slide-in-from-right duration-300">
+        <button (click)="ismenuOpen = false" class="self-end text-white p-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+
+        <nav class="flex flex-col gap-6 font-semibold">
+          <a (click)="ismenuOpen = false" routerLink="/dashboard/" class="text-lg border-b border-gray-600 pb-2">Dashboard</a>
+          <a (click)="ismenuOpen = false" routerLink="/dashboard/registrar-usuario" class="text-lg border-b border-gray-600 pb-2">Adicionar cliente</a>
+          <a (click)="ismenuOpen = false" routerLink="/dashboard/relatorio" class="text-lg border-b border-gray-600 pb-2">Relatórios</a>
+          <a (click)="ismenuOpen = false" routerLink="/dashboard/configuracoes" class="text-lg border-b border-gray-600 pb-2">Configurações</a>
+        </nav>
+
+        <div class="mt-auto flex flex-col gap-4">
+          <span class="text-sm opacity-80 text-center">Olá, Administrador</span>
+          <button class="bg-red-500 p-3 rounded font-bold" (click)="closeMenu()">Sair</button>
+        </div>
+      </div>
+    </div>
+  }
+</header>

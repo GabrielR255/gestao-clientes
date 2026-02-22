@@ -1,0 +1,111 @@
+<div class="relative min-h-screen bg-white">
+  <main class="flex min-h-screen items-center justify-center p-4">
+    <div class="flex w-full max-w-6xl flex-col lg:flex-row items-center gap-10">
+
+      <div class="hidden lg:flex w-full lg:w-1/2 justify-center">
+        <img
+          src="/cadastro.svg"
+          alt="Ícone de cadastro"
+          class="h-auto max-w-[300px] lg:max-w-full"
+        />
+      </div>
+
+      <div class="flex w-full lg:w-1/2 items-center justify-center rounded-lg bg-white p-2">
+        <div class="w-full max-w-md">
+
+          <div class="relative mb-8">
+            <div class="flex flex-col text-gray-900 mt-4 lg:mt-12">
+              <h1 class="text-3xl lg:text-4xl font-bold text-gray-600">Criar conta</h1>
+              <p class="text-sm text-gray-500">
+                Preencha todos os campos para prosseguir
+              </p>
+            </div>
+          </div>
+
+          <form
+            [formGroup]="registerForm"
+            (ngSubmit)="submit()"
+            class="flex flex-col gap-2"
+          >
+
+            <div class="flex flex-col w-full gap-1 relative pb-6">
+              <label class="text-gray-800 font-semibold text-sm">Nome</label>
+              <input
+                type="text"
+                placeholder="Seu nome"
+                formControlName="name"
+                class="w-full rounded border-2 border-gray-200 p-2 text-sm text-black outline-none focus:border-[#407bff] transition-colors"
+              />
+              @if (registerForm.controls.name.touched && registerForm.controls.name.invalid) {
+                <span class="text-xs text-red-500 absolute bottom-1 left-0 font-medium">
+                  Nome inválido (mín. 3 caracteres)
+                </span>
+              }
+            </div>
+
+            <div class="flex flex-col w-full gap-1 relative pb-6">
+              <label class="text-gray-800 font-semibold text-sm">Email</label>
+              <input
+                type="email"
+                placeholder="E-mail"
+                formControlName="email"
+                class="w-full rounded border-2 border-gray-200 p-2 text-sm text-black outline-none focus:border-[#407bff] transition-colors"
+              />
+              @if (registerForm.controls.email.touched && registerForm.controls.email.invalid) {
+                <span class="text-xs text-red-500 absolute bottom-1 left-0 font-medium">
+                  Digite seu email corretamente
+                </span>
+              }
+            </div>
+
+            <div class="flex flex-col w-full gap-1 relative pb-6">
+              <label class="text-gray-800 font-semibold text-sm">Senha</label>
+              <input
+                type="password"
+                placeholder="Mínimo 8 caracteres"
+                formControlName="password"
+                class="w-full rounded border-2 border-gray-200 p-2 text-sm text-black outline-none focus:border-[#407bff] transition-colors"
+              />
+              @if(registerForm.controls.password.touched && registerForm.controls.password.invalid){
+                <span class="text-xs text-red-500 absolute bottom-1 left-0 font-medium">
+                  Senha inválida (mín. 8 caracteres)
+                </span>
+              }
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mt-4">
+              <button
+                type="submit"
+                [disabled]="estaCarregando"
+                class="w-full sm:w-auto min-w-[150px] bg-[#25324f] text-white font-bold py-3 px-6 rounded shadow-lg 
+                       hover:opacity-90 transition-all uppercase tracking-widest text-sm 
+                       cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed 
+                       flex items-center justify-center gap-2">
+                
+                @if (estaCarregando) {
+                  <svg class="animate-spin h-4 w-4" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+                  </svg>
+                  <span>Cadastrando...</span>
+                } @else {
+                  <span>Cadastrar</span>
+                }
+              </button>
+
+              <button
+                type="button"
+                routerLink="/login"
+                class="w-full sm:flex-1 cursor-pointer border-2 border-[#407bff] text-[#407bff] py-2.5 text-sm font-bold hover:bg-blue-50 transition text-center rounded"
+              >
+                Efetuar Login
+              </button>
+            </div>
+          
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>

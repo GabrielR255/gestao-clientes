@@ -1,0 +1,78 @@
+<div class="min-h-screen flex flex-col bg-gray-100">
+  
+  <app-sidebar-nav class="w-full"></app-sidebar-nav>
+
+  <main class="flex-1 flex items-center justify-center p-6">
+
+    <div class="bg-white w-full max-w-md p-5 rounded-lg shadow-2xl relative">
+      
+  
+
+
+      <h2 class="text-2xl font-bold text-center text-[#25324f]  mb-5 ">
+Alterar meus dados
+    </h2>
+
+      <form [formGroup]="formconfig" (ngSubmit)="submit()" class="flex flex-col gap-6">
+
+        <div class="relative border-b-2 border-gray-200 focus-within:border-[#25324f] transition-all">
+          <label class="text-gray-500 text-xs font-semibold uppercase">Nome do cliente</label>
+          <input type="text" formControlName="name" placeholder="Digite seu nome"
+            class="w-full py-2 text-sm text-black outline-none bg-transparent" />
+          
+          @if (formconfig.controls.name.touched && formconfig.controls.name.invalid) {
+            <span class="text-[10px] text-red-500 absolute -bottom-4 left-0">Nome muito curto</span>
+          }
+        </div>
+
+        <div class="relative border-b-2 border-gray-200 focus-within:border-[#25324f] transition-all">
+          <label class="text-gray-500 text-xs font-semibold uppercase">Email</label>
+          <input type="email" formControlName="email" placeholder="example@mail.com"
+            class="w-full py-2 text-sm text-black outline-none bg-transparent" />
+          
+          @if (formconfig.controls.email.touched && formconfig.controls.email.invalid) {
+            <span class="text-[10px] text-red-500 absolute -bottom-4 left-0">Email inválido</span>
+          }
+        </div>
+
+        <div class="relative border-b-2 border-gray-200 focus-within:border-[#25324f] transition-all">
+          <label class="text-gray-500 text-xs font-semibold uppercase">Alterar senha atual</label>
+          <input type="password" formControlName="password" placeholder="Digite sua senha"
+            class="w-full py-2 text-sm text-black outline-none bg-transparent" />
+          
+          @if (formconfig.controls.email.touched && formconfig.controls.email.invalid) {
+            <span class="text-[10px] text-red-500 absolute -bottom-4 left-0">Email inválido</span>
+          }
+        </div>
+
+
+
+        <button 
+         type="submit"
+  [disabled]="estaCarregando"
+  class="mt-2 w-full bg-[#25324f] text-white font-bold py-3 rounded shadow-lg 
+         hover:opacity-90 transition-all uppercase tracking-widest text-sm 
+         cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed 
+         flex items-center justify-center gap-2">
+
+  @if (estaCarregando) {
+    <svg class="animate-spin h-4 w-4" viewBox="0 0 24 24">
+      <circle class="opacity-25" cx="12" cy="12" r="10"
+        stroke="currentColor" stroke-width="4"></circle>
+      <path class="opacity-75" fill="currentColor"
+        d="M4 12a8 8 0 018-8v8z"></path>
+    </svg>
+    Salvando dados...
+  } @else {
+    Alterar dados
+  }
+        
+        </button>
+
+      
+
+      </form>
+    </div>
+
+  </main>
+</div>

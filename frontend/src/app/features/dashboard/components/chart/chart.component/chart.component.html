@@ -1,0 +1,41 @@
+<div class="p-6 bg-gray-50 min-h-screen">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+      <h3 class="text-lg font-bold text-gray-800 mb-6">Crescimento de Clientes</h3>
+      <div class="h-64 w-full relative">
+        @if (isLoading()) {
+          <div class="absolute inset-0 bg-gray-100 animate-pulse rounded-lg flex items-center justify-center text-gray-400">
+            Carregando...
+          </div>
+        } @else {
+          @if (lineChartData()) {
+            <canvas baseChart 
+              [data]="lineChartData()!" 
+              [options]="lineChartOptions" 
+              [type]="'line'">
+            </canvas>
+          }
+        }
+      </div>
+    </div>
+
+    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+      <h3 class="text-lg font-bold text-gray-800 mb-6">Status dos Clientes</h3>
+      <div class="h-64 w-full relative">
+        @if (isLoading()) {
+          <div class="absolute inset-0 bg-gray-100 animate-pulse rounded-full w-48 h-48 mx-auto"></div>
+        } @else {
+          @if (pieChartData()) {
+            <canvas baseChart 
+              [data]="pieChartData()!" 
+              [options]="pieChartOptions" 
+              [type]="'pie'">
+            </canvas>
+          }
+        }
+      </div>
+    </div>
+
+  </div>
+</div>

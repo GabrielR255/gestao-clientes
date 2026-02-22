@@ -1,0 +1,107 @@
+<div class="min-h-screen flex flex-col bg-gray-100">
+  
+  <app-sidebar-nav class="w-full"></app-sidebar-nav>
+
+  <main class="flex-1 flex items-center justify-center p-6">
+
+    <div class="bg-white w-full max-w-md p-5 rounded-lg shadow-2xl relative">
+ 
+
+      <h2 class="text-2xl font-bold text-center text-[#25324f]  mb-5 ">
+REGISTRAR CLIENTE
+    </h2>
+  
+      <form [formGroup]="clientform" (ngSubmit)="submit()" class="flex flex-col gap-4">
+
+        <div class="relative border-b-2 border-gray-200 focus-within:border-[#25324f] transition-all">
+          <label class="text-gray-500 text-xs font-semibold uppercase">Nome do cliente</label>
+          <input type="text" formControlName="name" placeholder="Digite seu nome"
+            class="w-full py-2 text-sm text-black outline-none bg-transparent" />
+          
+          @if (clientform.controls.name.touched && clientform.controls.name.invalid) {
+            <span class="text-[10px] text-red-500 absolute -bottom-4 left-0">Nome muito curto</span>
+          }
+        </div>
+
+        <div class="relative border-b-2 border-gray-200 focus-within:border-[#25324f] transition-all">
+          <label class="text-gray-500 text-xs font-semibold uppercase">Email</label>
+          <input type="email" formControlName="email" placeholder="example@mail.com"
+            class="w-full py-2 text-sm text-black outline-none bg-transparent" />
+          
+          @if (clientform.controls.email.touched && clientform.controls.email.invalid) {
+            <span class="text-[10px] text-red-500 absolute -bottom-4 left-0">Email inválido</span>
+          }
+        </div>
+
+        <div class="relative border-b-2 border-gray-200 focus-within:border-[#25324f] transition-all">
+          <label class="text-gray-500 text-xs font-semibold uppercase">CPF</label>
+          <input type="text" formControlName="cpf" mask="000.000.000-00" [dropSpecialCharacters]="true"
+            placeholder="000.000.000-00" class="w-full py-2 text-sm text-black outline-none bg-transparent" />
+          
+          @if (clientform.controls.cpf.touched && clientform.controls.cpf.invalid) {
+            <span class="text-[10px] text-red-500 absolute -bottom-4 left-0">CPF deve ter 11 dígitos</span>
+          }
+        </div>
+
+        <div class="relative border-b-2 border-gray-200 focus-within:border-[#25324f] transition-all">
+          <label class="text-gray-500 text-xs font-semibold uppercase">Contato</label>
+          <input type="text" formControlName="phone" mask="(00) 00000-0000" [dropSpecialCharacters]="true"
+            placeholder="(00) 00000-0000" class="w-full py-2 text-sm text-black outline-none bg-transparent" />
+          
+          @if (clientform.controls.phone.touched && clientform.controls.phone.invalid) {
+            <span class="text-[10px] text-red-500 absolute -bottom-4 left-0">Telefone inválido</span>
+          }
+        </div>
+
+        <div class="relative border-b-2 border-gray-200 focus-within:border-cyan-400 transition-all">
+  <label class="text-gray-500 text-xs font-semibold uppercase">Status do Cliente</label>
+  
+  <select 
+    formControlName="status"
+    class="w-full py-2 text-sm text-black outline-none bg-transparent appearance-none cursor-pointer"
+  >
+    <option value="" disabled selected>Selecione o status</option>
+    <option value="ativo">Ativo</option>
+    <option value="pendente">Pendente</option>
+  </select>
+
+  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pt-4">
+    <svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+    </svg>
+  </div>
+
+  @if (clientform.controls['status']?.touched && clientform.controls['status']?.invalid) {
+    <span class="text-[10px] text-red-500 absolute -bottom-4 left-0">Selecione uma opção</span>
+  }
+</div>
+
+        <button 
+  type="submit"
+  [disabled]="estaCarregando"
+  class="mt-2 w-full bg-[#25324f] text-white font-bold py-3 rounded shadow-lg 
+         hover:opacity-90 transition-all uppercase tracking-widest text-sm 
+         cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed 
+         flex items-center justify-center gap-2">
+
+  @if (estaCarregando) {
+    <svg class="animate-spin h-4 w-4" viewBox="0 0 24 24">
+      <circle class="opacity-25" cx="12" cy="12" r="10"
+        stroke="currentColor" stroke-width="4"></circle>
+      <path class="opacity-75" fill="currentColor"
+        d="M4 12a8 8 0 018-8v8z"></path>
+    </svg>
+    Cadastrando...
+  } @else {
+    Cadastrar
+  }
+
+</button>
+
+      
+
+      </form>
+    </div>
+
+  </main>
+</div>

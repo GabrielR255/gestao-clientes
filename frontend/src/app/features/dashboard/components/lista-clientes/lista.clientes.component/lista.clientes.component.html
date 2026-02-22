@@ -1,0 +1,115 @@
+<div class="relative min-h-screen bg-gray-100 flex flex-col">
+  <main class="flex-1 p-4 md:p-8">
+    <section class="w-full max-w-6xl mx-auto bg-white shadow-sm border border-gray-200 rounded-lg overflow-hidden">
+      
+      <div class="flex flex-col sm:flex-row justify-between p-4 border-b border-gray-200 gap-4">
+        <h1 class="font-bold text-[#2d3748] text-lg">
+          Histórico de clientes
+        </h1>
+
+        <div class="flex gap-2 items-center bg-gray-100 border-2 border-[#25324f] px-2 py-1 rounded w-full sm:w-auto">
+          <img src="icons/search.svg" alt="search-icon" class="w-4 h-4 shrink-0">
+          <input 
+            class="outline-none bg-transparent w-full text-sm" 
+            (input)="atualizarBusca($event)" 
+            placeholder="Digite nome ou email" 
+            type="text"
+          >
+        </div>
+      </div>
+
+      <div class="overflow-x-auto">
+        <div class="inline-block min-w-full align-middle">
+          <div class="overflow-y-auto h-[500px]"> 
+            <table class="min-w-full border-collapse">
+              <thead>
+                <tr class="bg-[#f8fafc] text-left text-sm text-[#4a5568] border-b border-gray-200 sticky top-0 z-10">
+                  <th class="p-4 font-semibold whitespace-nowrap">Nome</th>
+                  <th class="p-4 font-semibold whitespace-nowrap">Email</th>
+                  <th class="p-4 font-semibold whitespace-nowrap">Status</th>
+                  <th class="p-4 font-semibold whitespace-nowrap">Ações</th>
+                </tr>
+              </thead>
+
+              <tbody class="divide-y divide-gray-100 bg-white">
+                @if(clientesFiltrados().length > 0) {
+                  @for (item of clientesFiltrados(); track item.id) {
+                    <tr class="text-sm hover:bg-gray-50 transition-colors">
+                      <td class="p-4 font-bold text-gray-800 whitespace-nowrap">
+                        {{ item.name }}
+                      </td>
+                      <td class="p-4 text-gray-600 whitespace-nowrap">
+                        {{ item.email }}
+                      </td>
+                      <td class="p-4 whitespace-nowrap">
+                        <span 
+                          class="px-3 py-1 rounded text-white text-[10px] md:text-xs font-bold uppercase tracking-wider inline-block"
+                          [ngClass]="getStatuslist(item.status)"
+                        >
+                          {{ item.status }}
+                        </span>
+                      </td>
+                      <td class="p-4 whitespace-nowrap">
+                        <div class="flex gap-2">
+                          <button 
+                            type="button"
+                            (click)="abrirModalEdit(item)"
+                            class="bg-[#3182ce] hover:bg-blue-700 text-white p-2 rounded shadow-sm cursor-pointer transition-colors"
+                          >
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+                            </svg>
+                          </button>
+
+                          <button 
+                            type="button"
+                            (click)="abrirModalDelete(item)"
+                            class="bg-[#e53e3e] hover:bg-red-700 text-white p-2 rounded shadow-sm cursor-pointer transition-colors"
+                          >
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                            </svg>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  }
+                } @else {
+                  <tr>
+                    <td colspan="4" class="p-8">
+                      <div class="flex flex-col items-center justify-center gap-4">
+                        <p class="text-gray-500 text-sm">Nenhum cliente encontrado</p>
+                        <button
+                          routerLink="/dashboard/registrar-usuario"
+                          class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded cursor-pointer transition-colors"
+                        >
+                          + Novo cliente
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+@if (isModalDeleteOpen) {
+  <app-modal-delete 
+    [visibleDelete]="clienteParaExcluir" 
+    (fechar)="fecharModalDelete()"
+    (confirmar)="confirmarExclusao()">
+  </app-modal-delete>
+}
+
+@if (isModalEditOpen) {
+  <app-modal-edit
+    [visibleEdit]="clienteParaEditar"
+    (fechar)="fecharModalEdit()"
+    (salvar)="editClient($event)">
+  </app-modal-edit>
+}

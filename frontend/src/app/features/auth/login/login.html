@@ -1,0 +1,89 @@
+<div class="relative min-h-screen bg-white">
+  <main class="flex min-h-screen items-center justify-center p-6">
+    <div class="flex w-full max-w-6xl items-center gap-10">
+
+      <div class="hidden lg:flex w-1/2 justify-center">
+        <img
+          src="/dashboard-login.svg"
+          alt="Ícone de cadastro"
+          class="h-auto max-w-full"
+        />
+      </div>
+
+      <div class="flex w-full lg:w-1/2 items-center justify-center rounded-lg bg-white">
+        <div class="w-full max-w-md">
+
+          <div class="relative mb-6 min-h-[50px]">
+            @if(mensagemFeedback){
+              <div [class]="mensagemFeedback.tipo === 'sucesso' ? 'text-green-600 bg-green-100 border-green-200' : 'text-red-600 bg-red-100 border-red-200'"
+                   class="p-3 rounded-md border text-center transition-all absolute top-0 w-full z-20 shadow-sm animate-in fade-in duration-300">
+                {{ mensagemFeedback.texto }}
+              </div>
+            }
+          </div>
+
+          <div class="flex flex-col text-gray-900 gap-2 mb-8">
+            <h1 class="text-4xl font-bold text-gray-600">Login</h1>
+            <p class="text-sm text-gray-500 opacity-90">
+              Efetue login para acessar o dashboard
+            </p>
+          </div>
+
+          <form
+            [formGroup]="Formlogin"
+            (ngSubmit)="submit()"
+            class="flex flex-col gap-6"
+          >
+
+            <div class="flex flex-col w-full gap-2 relative">
+              <label class="text-gray-800 font-semibold text-sm">Email</label>
+              <input
+                type="email"
+                placeholder="E-mail"
+                formControlName="email"
+                class="w-full rounded border-2 border-gray-200 p-2 text-sm text-black outline-none focus:border-[#407bff] transition-colors"
+              />
+              @if (Formlogin.controls.email.touched && Formlogin.controls.email.invalid) {
+                <span class="text-xs text-red-500 mt-1">Digite seu email corretamente</span>
+              }
+            </div>
+
+            <div class="flex flex-col w-full gap-2 relative">
+              <label class="text-gray-800 font-semibold text-sm">Senha</label>
+              <input
+                type="password"
+                placeholder="Senha"
+                formControlName="password"
+                class="w-full rounded border-2 border-gray-200 p-2 text-sm text-black outline-none focus:border-[#407bff] transition-colors"
+              />
+              @if(Formlogin.controls.password.touched && Formlogin.controls.password.invalid){
+                <span class="text-xs text-red-500 mt-1">Digite sua senha por favor</span>
+              }
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-4 mt-2">
+              <button
+                type="submit"
+                [disabled]="isLoading"
+                class="w-full sm:w-1/2 cursor-pointer rounded bg-[#407BFF] py-3 font-semibold text-white transition hover:bg-blue-600 disabled:opacity-50"
+              >
+                {{ isLoading ? 'Aguarde...' : 'Acessar dashboard' }}
+              </button>
+
+              <button
+                type="button"
+                routerLink="/cadastro"
+                class="w-full sm:w-1/2 cursor-pointer border-2 border-[#407bff] text-black py-3 text-sm font-semibold hover:bg-blue-50 transition text-center"
+              >
+                Fazer cadastro
+              </button>
+            </div>
+          
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
