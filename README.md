@@ -62,3 +62,9 @@ O backend foi estruturado seguindo o padrão **Modular Monolith**:
 - Separação clara por módulos de domínio
 - Cada módulo contém sua própria responsabilidade
 - Escalável sem necessidade imediata de microserviços
+
+
+<img width="1349" height="636" alt="Home" src="https://github.com/user-attachments/assets/9ecfc77a-34c7-4b8e-9a6b-df84f83161bf" />
+---
+<img width="1352" height="635" alt="Dashboard" src="https://github.com/user-attachments/assets/647b6ce4-c655-4cbd-a410-fbd3ae10d6f7" />
+
